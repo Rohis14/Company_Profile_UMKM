@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { label: "About Us", href: "#about", hash: "#about" },
   { label: "Services", href: "#services", hash: "#services" },
   { label: "Products", href: "#products", hash: "#products" },
-  { label: "Locations", href: "/locations" },
+  { label: "Locations", href: "#contact", hash: "#contact" },
 ];
 
 const linkBase =

@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const SERVICES = [
   {
     no: "01",
@@ -128,13 +126,13 @@ export default function Services() {
                   </span>
                 </div>
 
-                <Link
-                  href="/contact"
+                <a
+                  href="#contact"
                   aria-label={`Book ${service.title}`}
                   className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-zinc-900 text-zinc-200 transition-colors duration-150 hover:bg-white hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 motion-reduce:transition-none"
                 >
                   <ArrowUpRightIcon />
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

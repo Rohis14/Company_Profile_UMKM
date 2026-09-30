@@ -1,6 +1,8 @@
 import About from "@/components/about";
+import Contact from "@/components/contact";
 import Hero from "@/components/hero";
 import Products from "@/components/products";
+import Reviews from "@/components/reviews";
 import Services from "@/components/services";
 
 export default function Home() {
@@ -18,6 +20,8 @@ export default function Home() {
         <About />
         <Services />
         <Products />
+        <Reviews />
+        <Contact />
       </main>
     </div>
   );
