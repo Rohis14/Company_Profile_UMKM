@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
