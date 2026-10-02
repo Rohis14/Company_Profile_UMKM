@@ -48,12 +48,12 @@ export default function Navbar() {
           <NavLinks />
         </div>
 
-        <Link
-          href="/contact"
+        <a
+          href="#contact"
           className="justify-self-end rounded-full bg-white px-6 py-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-zinc-950 transition-colors duration-150 hover:bg-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 motion-reduce:transition-none"
         >
           Contact Us
-        </Link>
+        </a>
       </nav>
     </header>
   );
