@@ -37,24 +37,21 @@ export async function PUT(request, { params }) {
 
     const body = await request.json();
 
-    const { judul, deskripsi, gambar, sumber } = body;
+    const { gambar } = body;
 
-    if (!judul || !deskripsi || !gambar) {
+    if (!gambar) {
         return Response.json(
             {
-                message: "Judul, deskripsi, dan gambar wajib diisi"
+                message: "Gambar wajib diisi"
             },
             { status: 400 }
         );
     }
 
-    item.judul = judul;
-    item.deskripsi = deskripsi;
     item.gambar = gambar;
-    item.sumber = sumber || "Unsplash";
 
     return Response.json({
-        message: "Gallery berhasil diperbarui",
+        message: "Gambar gallery berhasil diperbarui",
         data: item
     });
 }
@@ -78,7 +75,7 @@ export async function DELETE(request, { params }) {
     const deletedGallery = gallery.splice(index, 1);
 
     return Response.json({
-        message: "Gallery berhasil dihapus",
+        message: "Gambar gallery berhasil dihapus",
         data: deletedGallery[0]
     });
 }
