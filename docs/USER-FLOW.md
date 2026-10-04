@@ -58,7 +58,7 @@ flowchart TD
 2. Klik **Services** di navbar (atau scroll 1 layar).
 3. Baca kartu layanan (`components/services.js`: 6 paket, harga 50–130) → klik **Contact Us** (`href="#contact"` di `navbar.js`).
 
-Kriteria diterima: harga terbaca di mobile 390px tanpa scroll horizontal; anchor tidak tertutup navbar (sudah ada `scroll-padding-top: 96px` di `globals.css`).
+Kriteria diterima: harga terbaca di desktop 1440px tanpa scroll horizontal; anchor tidak tertutup navbar (sudah ada `scroll-padding-top: 96px` di `globals.css`). Scope desktop-only sesuai wireframe Figma.
 
 ## Sub-flow 2: calon booking via kontak
 
@@ -72,9 +72,9 @@ Kondisi saat ini (wajib disampaikan saat demo):
 - Helper `kirimPesan()` di `lib/formspree.js` sudah siap (POST JSON ke `https://formspree.io/f/mgvgzgw`) tetapi **belum dipanggil** dari form. Ini TODO frontend + backend sebelum rilis.
 - Rencana WhatsApp booking belum ada kode (`wa.me` tidak ditemukan di repo) — alur target: setelah form sukses, tampilkan tombol "Lanjut via WhatsApp" dengan teks terisi otomatis.
 
-## Responsif & aksesibilitas
+## Layar & aksesibilitas (desktop-only)
 
-- Mobile-first: grid `grid-cols-1` → `sm:grid-cols-2` (form) dan `lg:grid-cols-2` (kontak); hero brand `grid-cols-2 → sm:3 → lg:5`.
+- Target: desktop 1440px sesuai frame Figma. Kelas breakpoint (`sm:`, `lg:`) di kode menjaga layout tidak pecah, tetapi tidak diuji di mobile.
 - `scroll-behavior: smooth` + `prefers-reduced-motion` sudah ditangani di `globals.css`.
 - Semua link CTA punya `focus-visible:ring` — QA perlu uji navigasi keyboard.
 

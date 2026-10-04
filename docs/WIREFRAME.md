@@ -6,13 +6,21 @@ Implementasi: `components/*.js`, `app/globals.css`, `app/page.js`.
 
 ## Cara membaca dokumen ini
 
-- **Low-fi (Figma)** = kotak abu + label, fokus alur bukan warna.
-- **Hi-fi (kode)** = hasil Tailwind di repo ini.
-- Setiap section di bawah punya pasangan `wireframe-*.png` (dari Figma) dan `hasil-*.png` (screenshot web) di `docs/assets/`.
+- Desain memakai **1 frame Figma desktop** berisi seluruh landing page berurutan (company profile satu halaman).
+- **Wireframe (Figma)** = struktur/alur di frame tersebut; **hasil (kode)** = implementasi Tailwind di repo ini.
+- Aset tersimpan di `docs/assets/`: `wireframe-landing-desktop.png` (dari Figma) dan `hasil-landing-desktop.png` (screenshot web desktop).
 
-## Peta frame Figma → section kode
+### Wireframe — 1 frame landing desktop (Figma)
 
-| # | Frame Figma | Section kode | Tujuan & CTA |
+![Wireframe landing desktop SiBarber](assets/wireframe-landing-desktop.png)
+
+### Hasil implementasi — landing desktop (web)
+
+![Hasil landing desktop SiBarber](assets/hasil-landing-desktop.png)
+
+## Peta area frame → section kode
+
+| # | Area di frame tunggal | Section kode | Tujuan & CTA |
 | :--- | :--- | :--- | :--- |
 | 1 | Navbar + Hero | `navbar.js`, `nav-links.js`, `hero.js` (`#top`) | Kesan pertama: badge rating, headline, CTA. CTA: nav anchor + `Contact Us → #contact`. |
 | 2 | About | `about.js` (`#about`) | Kepercayaan: statistik 15K/12/234 + pita layanan. Tanpa CTA, jembatan ke Services. |
@@ -23,7 +31,7 @@ Implementasi: `components/*.js`, `app/globals.css`, `app/page.js`.
 
 ## Anotasi per section (ringkas)
 
-1. **Navbar**: sticky, 3 kolom (logo kiri, pill nav tengah, CTA kanan). Mobile: pill nav disembunyikan (`hidden lg:block`) — pastikan ada menu mobile atau dokumentasikan sebagai limitasi.
+1. **Navbar**: sticky, 3 kolom (logo kiri, pill nav tengah, CTA kanan). Target desktop: pill nav tampil penuh (`lg:block`); tampilan di bawah itu di luar scope (desktop-only).
 2. **Hero**: badge avatar + rating, H1 dua baris (italic display + gold), marquee mikro, grid brand 2→3→5 kolom.
 3. **About**: grid 1 kolom → `lg:2 kolom`, H2 italic uppercase dengan underline biru.
 4. **Services**: daftar bernomor 01–06 dengan harga, 1 kartu signature ditonjolkan.
@@ -43,19 +51,20 @@ Implementasi: `components/*.js`, `app/globals.css`, `app/page.js`.
 | Border | `border-white/10` | kartu, pill nav |
 | Scroll | `smooth` + `scroll-padding-top: 96px`, hormati `prefers-reduced-motion` | anchor di bawah sticky header |
 
-## Responsif
+## Target layar (desktop-only)
 
-- Hero brand: `grid-cols-2 → sm:3 → lg:5`.
-- Form kontak: `grid-cols-1 → sm:2`.
-- Panel kontak: `grid-cols-1 → lg:2`.
-- Uji wajib: 390px (tidak ada scroll-x), 768px, 1440px. Screenshot ketiganya masuk `docs/assets/`.
+- Scope disepakati: **desktop 1440px**. Frame Figma dan screenshot sama-sama desktop.
+- Kode memakai kelas breakpoint (`sm:`, `lg:`) sehingga layout tidak pecah saat jendela diperkecil, tetapi QA hanya menguji di desktop.
+- Uji wajib: buka `http://localhost:3000` di 1440px, pastikan tidak ada scroll horizontal dan anchor tidak tertutup navbar sticky.
 
-## Cara ekspor aset (5 menit di Figma)
+## Status aset (sudah terisi)
 
-1. Buka link Figma di atas → pilih 6 frame → Export PNG 2x.
-2. Simpan sebagai `docs/assets/wireframe-navbar-hero.png`, `wireframe-about.png`, `wireframe-services.png`, `wireframe-products.png`, `wireframe-reviews.png`, `wireframe-contact-footer.png`.
-3. Jalankan `npm run dev`, screenshot tiap section (desktop 1440 + mobile 390) sebagai `hasil-*.png` di folder yang sama.
-4. Commit terpisah: `docs: tambah aset wireframe dan screenshot SiBarber`.
+| File di `docs/assets/` | Sumber | Status |
+| :--- | :--- | :--- |
+| `wireframe-landing-desktop.png` | Export 1 frame Figma `SiBarber-UI-UX` (desktop, PNG) | Sudah ada |
+| `hasil-landing-desktop.png` | Screenshot `npm run dev` → `http://localhost:3000` (desktop 1440px, full page) | Sudah ada |
+
+> Jika frame Figma direvisi, ekspor ulang dengan nama file yang sama lalu commit `docs: perbarui aset wireframe SiBarber`.
 
 ## Status implementasi vs desain
 

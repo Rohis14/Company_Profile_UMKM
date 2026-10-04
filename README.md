@@ -1,6 +1,6 @@
 # SiBarber — Website Profile & Booking UMKM Barbershop
 
-Aplikasi web responsif modern untuk UMKM Barbershop, dibangun dengan **Next.js (App Router)**, **React**, dan **Tailwind CSS**.
+Aplikasi web modern untuk desktop untuk UMKM Barbershop, dibangun dengan **Next.js (App Router)**, **React**, dan **Tailwind CSS**.
 Data katalog (layanan, produk, barber, galeri, profil) disajikan lewat **API Routes Next.js** berbasis modul data JS, dan form kontak disiapkan untuk integrasi **Formspree**.
 
 > Proyek ini dikerjakan sebagai simulasi tim software house **"KodeKita Studio"** — mata pelajaran Rekayasa Perangkat Lunak (RPL), Kelas XI.
@@ -28,7 +28,7 @@ Data katalog (layanan, produk, barber, galeri, profil) disajikan lewat **API Rou
 - **Katalog layanan & produk**: harga dan deskripsi dari API (`/api/services`, `/api/products`).
 - **Data barber, galeri, profil**: `/api/barbers`, `/api/gallery`, `/api/profile` (+ rute `[id]`).
 - **Kontak**: info telepon/email/alamat/jam + form nama, email, telepon, pesan (`components/contact.js`, `components/contact-form.js`).
-- **Tema dark responsif**: background `zinc-950`, aksen emas `text-gold (#f5a623)`, font Geist + Playfair Display, mobile-first (`sm:`, `lg:`).
+- **Tema dark untuk desktop**: background `zinc-950`, aksen emas `text-gold (#f5a623)`, font Geist + Playfair Display. Target utama layar desktop 1440px (wireframe Figma desktop-only).
 
 ---
 
@@ -124,16 +124,20 @@ curl http://localhost:3000/api/products/1
 - **Data kontak ganda**: `data/profile.js` (Depok, `081234567890`) berbeda dengan tampilan `components/contact.js` (`+1 561...`, `info@Advizo.com`, Newtown CT). Perlu disepakati satu sumber kebenaran sebelum rilis.
 - **Metadata**: `app/layout.js` masih memakai judul default `"Create Next App"` — ganti dengan `"SiBarber — Barbershop UMKM"` + deskripsi sebelum demo.
 
-## Screenshot
+## Screenshot (desktop)
 
 | Tampilan | File |
 | :--- | :--- |
-| Hero desktop | `docs/assets/hasil-hero-desktop.png` |
-| Services + Products | `docs/assets/hasil-services-products.png` |
-| Contact mobile | `docs/assets/hasil-contact-mobile.png` |
-| Wireframe Figma | `docs/assets/wireframe-*.png` + link Figma di atas |
+| Wireframe Figma (1 frame landing desktop) | `docs/assets/wireframe-landing-desktop.png` |
+| Hasil implementasi web (landing desktop) | `docs/assets/hasil-landing-desktop.png` |
 
-> Cara isi: ekspor frame Figma `SiBarber-UI-UX` sebagai PNG ke `docs/assets/`, lalu screenshot `npm run dev` di `http://localhost:3000` ukuran desktop (1440px) dan mobile (390px).
+### Wireframe — desain Figma
+
+![Wireframe landing desktop SiBarber](docs/assets/wireframe-landing-desktop.png)
+
+### Hasil implementasi — website
+
+![Hasil landing desktop SiBarber](docs/assets/hasil-landing-desktop.png)
 
 ## Dokumentasi
 

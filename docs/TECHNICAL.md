@@ -82,7 +82,7 @@ curl http://localhost:3000/api/products/1
 3. Form: uji kosong, email salah, telepon huruf — pastikan ada pesan error setelah validasi ditambahkan.
 4. API: GET semua endpoint 200 JSON; POST services tanpa field → 400; `[id]` tidak ada → respons 404 yang jelas (tambah jika belum ada).
 5. Gambar Unsplash produk/galeri termuat (uji offline/lambat).
-6. Responsif 390px / 768px / 1440px, tidak ada scroll horizontal.
+6. Tampilan desktop 1440px: tidak ada scroll horizontal, anchor tidak tertutup navbar (scope desktop-only, mobile tidak diuji).
 7. Keyboard + `prefers-reduced-motion` (tab order, focus ring, animasi mati).
 
 ## 9. Deploy & pengembangan lanjut
