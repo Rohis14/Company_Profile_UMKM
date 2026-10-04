@@ -42,13 +42,16 @@ export async function PUT(request, { params }) {
         harga,
         deskripsi,
         detail,
-        gambar
+        gambar,
+        tag,
+        rating,
+        goldTag
     } = body;
 
-    if (!nama || !harga || !deskripsi || !detail || !gambar) {
+    if (!nama || !harga || !deskripsi || !detail || !gambar || !tag || !rating) {
         return Response.json(
             {
-                message: "Nama, harga, deskripsi, detail, dan gambar wajib diisi"
+                message: "Nama, harga, deskripsi, detail, gambar, tag, dan rating wajib diisi"
             },
             { status: 400 }
         );
@@ -59,6 +62,9 @@ export async function PUT(request, { params }) {
     product.deskripsi = deskripsi;
     product.detail = detail;
     product.gambar = gambar;
+    product.tag = tag;
+    product.rating = rating;
+    product.goldTag = goldTag || false;
 
     return Response.json({
         message: "Produk berhasil diperbarui",
