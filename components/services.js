@@ -1,3 +1,11 @@
+import Image from "next/image";
+
+// Foto barber untuk section Services (Unsplash)
+const SERVICE_IMAGE = {
+  src: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=1200&auto=format&fit=crop",
+  alt: "Barber SiBarber sedang mengerjakan trimming",
+};
+
 const SERVICES = [
   {
     no: "01",
@@ -37,26 +45,6 @@ const SERVICES = [
     price: "50",
   },
 ];
-
-function ScissorsIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-16 w-16"
-    >
-      <circle cx="6" cy="6" r="3" />
-      <circle cx="6" cy="18" r="3" />
-      <line x1="20" y1="4" x2="8.12" y2="15.88" />
-      <line x1="14.47" y1="14.48" x2="20" y2="20" />
-      <line x1="8.12" y1="8.12" x2="12" y2="12" />
-    </svg>
-  );
-}
 
 function ArrowUpRightIcon() {
   return (
@@ -140,14 +128,15 @@ export default function Services() {
           <div
             role="img"
             aria-label="Photo of a SiBarber barber at work"
-            className="flex aspect-[13/20] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-950"
+            className="relative flex aspect-[13/20] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-950"
           >
-            <div className="flex flex-col items-center gap-4 text-zinc-600">
-              <ScissorsIcon />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.3em]">
-                Barbershop photo
-              </span>
-            </div>
+            <Image
+              src={SERVICE_IMAGE.src}
+              alt={SERVICE_IMAGE.alt}
+              fill
+              sizes="(min-width: 1024px) 30vw, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </div>

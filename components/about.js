@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const STATS = [
   { value: "15K", label: "Fresh cuts delivered" },
   { value: "12", label: "Master barbers" },
@@ -7,25 +9,11 @@ const STATS = [
 const BAND_TEXT =
   "• Haircut • Style • Standard • Quality • Result • Precision • Service •";
 
-function ScissorsIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-16 w-16"
-    >
-      <circle cx="6" cy="6" r="3" />
-      <circle cx="6" cy="18" r="3" />
-      <line x1="20" y1="4" x2="8.12" y2="15.88" />
-      <line x1="14.47" y1="14.48" x2="20" y2="20" />
-      <line x1="8.12" y1="8.12" x2="12" y2="12" />
-    </svg>
-  );
-}
+// Foto barbershop untuk section About (Unsplash)
+const ABOUT_IMAGE = {
+  src: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200&auto=format&fit=crop",
+  alt: "Suasana interior SiBarber barbershop",
+};
 
 function UnderlinedLine({ children, className }) {
   return (
@@ -89,14 +77,16 @@ export default function About() {
         <div
           role="img"
           aria-label="Photo of the SiBarber barbershop"
-          className="flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-950"
+          className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-950"
         >
-          <div className="flex flex-col items-center gap-4 text-zinc-600">
-            <ScissorsIcon />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.3em]">
-              Barbershop photo
-            </span>
-          </div>
+          <Image
+            src={ABOUT_IMAGE.src}
+            alt={ABOUT_IMAGE.alt}
+            fill
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            className="object-cover"
+            priority
+          />
         </div>
       </div>
 

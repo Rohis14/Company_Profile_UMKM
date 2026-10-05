@@ -21,7 +21,7 @@ let products = [
         harga: 40000,
         deskripsi: "Hair clay dengan tekstur matte untuk gaya rambut modern.",
         detail: "Memberikan kontrol rambut tanpa membuat rambut terlihat terlalu berminyak.",
-        gambar: "https://images.unsplash.com/photo-1598522350355-d3f4f9c8b5c5?q=80&w=1000&auto=format&fit=crop"
+        gambar: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1000&auto=format&fit=crop"
     },
     {
         id: 4,
