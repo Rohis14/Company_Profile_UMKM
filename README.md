@@ -1,37 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SiBarber — Website Profile & Booking UMKM Barbershop
 
-## Getting Started
+Aplikasi web modern untuk desktop untuk UMKM Barbershop, dibangun dengan **Next.js (App Router)**, **React**, dan **Tailwind CSS**.
+Data katalog (layanan, produk, barber, galeri, profil) disajikan lewat **API Routes Next.js** berbasis modul data JS, dan form kontak disiapkan untuk integrasi **Formspree**.
+
+> Proyek ini dikerjakan sebagai simulasi tim software house **"KodeKita Studio"** — mata pelajaran Rekayasa Perangkat Lunak (RPL), Kelas XI.
+> Repository: https://github.com/Rohis14/Company_Profile_UMKM
+> Desain UI/UX & wireframe (Figma): https://www.figma.com/design/O0ShMf9L8F7ojARyujcjqS/SiBarber-UI-UX?node-id=0-1&t=TjJ06M1JGWRwFz7B-1
 
 First, run the development server:
 
+## Anggota Tim & Peran
+
+| Nama | Peran (Role) | Tanggung Jawab Utama |
+| :--- | :--- | :--- |
+| **Rois Irfa'i Wahid** | Project Manager & Integration | Repository, branch `develop`, review PR, konfigurasi Next.js, resolve merge conflict |
+| **Arga (@argottzz)** | UI/UX Designer & Dokumentasi | Wireframe/prototype di Figma, user flow, `README.md`, dokumentasi teknis |
+| **Kaysan** | Frontend Developer | Slicing UI: Hero, Navbar, Footer, About, Services, Products, Reviews, Contact + styling Tailwind |
+| **Sultan Azzam** | Backend Developer | Modul `data/*.js`, API Routes `app/api/*`, validasi, rencana integrasi WhatsApp booking |
+| **Sultan Rasyid** | QA / Tester | Uji UI/UX & responsif, Issue `bug`, verifikasi PR sebelum merge |
+
+---
+
+## Fitur Utama
+
+- **One-page company profile**: `Hero → About → Services → Products → Reviews → Contact` + `Navbar` sticky + `Footer` (`app/page.js`).
+- **Navigasi anchor halus** dengan status aktif: `#top`, `#about`, `#services`, `#products`, `#contact` (`components/nav-links.js`).
+- **Katalog layanan & produk**: harga dan deskripsi dari API (`/api/services`, `/api/products`).
+- **Data barber, galeri, profil**: `/api/barbers`, `/api/gallery`, `/api/profile` (+ rute `[id]`).
+- **Kontak**: info telepon/email/alamat/jam + form nama, email, telepon, pesan (`components/contact.js`, `components/contact-form.js`).
+- **Tema dark untuk desktop**: background `zinc-950`, aksen emas `text-gold (#f5a623)`, font Geist + Playfair Display. Target utama layar desktop 1440px (wireframe Figma desktop-only).
+
+---
+
+## Cara Menjalankan Proyek Lokal
+
+### Prasyarat
+
+- Node.js 20+ dan npm
+- Git
+
+### 1. Clone repository
+
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Rohis14/Company_Profile_UMKM.git
+cd Company_Profile_UMKM
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependensi
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Jalankan mode pengembangan
 
-## Learn More
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Buka http://localhost:3000 di browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Build & jalan produksi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+npm start
+```
 
-## Deploy on Vercel
+### 5. Lint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run lint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# Company_Profile_UMKM" 
+---
+
+## Struktur Folder
+
+```
+app/
+  page.js            # susunan section landing (Hero, About, Services, Products, Reviews, Contact)
+  layout.js          # Navbar + Footer global, font Geist & Playfair Display
+  globals.css        # tema Tailwind (dark, gold #f5a623, smooth scroll)
+  api/
+    profile/route.js
+    services/route.js + services/[id]/route.js
+    products/route.js + products/[id]/route.js
+    barbers/route.js  + barbers/[id]/route.js
+    gallery/route.js  + gallery/[id]/route.js
+components/          # hero, navbar, nav-links, about, services, products, reviews, contact, contact-form, footer
+data/                # profile, services, products, barbers, gallery (CommonJS module.exports)
+lib/formspree.js     # helper kirimPesan() ke Formspree
+public/              # aset statis
+docs/                # USER-FLOW, TECHNICAL, WIREFRAME + assets/
+```
+
+## API Endpoint
+
+| Method | Endpoint | Deskripsi |
+| :--- | :--- | :--- |
+| GET | `/api/profile` | Profil UMKM SiBarber |
+| GET | `/api/services` | Daftar layanan |
+| POST | `/api/services` | Tambah layanan (`nama, harga, deskripsi` wajib) |
+| GET | `/api/services/[id]` | Detail layanan |
+| GET | `/api/products` | Daftar produk grooming |
+| GET | `/api/products/[id]` | Detail produk |
+| GET | `/api/barbers` | Daftar barber |
+| GET | `/api/barbers/[id]` | Detail barber |
+| GET | `/api/gallery` | Daftar galeri |
+| GET | `/api/gallery/[id]` | Detail galeri |
+
+Contoh:
+
+```bash
+curl http://localhost:3000/api/services
+curl http://localhost:3000/api/products/1
+```
+
+## Integrasi & Batasan Diketahui
+
+- **Formspree**: helper `kirimPesan()` ada di `lib/formspree.js` (endpoint `https://formspree.io/f/mgvgzgw`), tetapi `components/contact-form.js` saat ini masih `onSubmit preventDefault` (belum memanggil helper). QA wajib uji ulang setelah disambungkan.
+- **WhatsApp booking**: disebut di brief awal sebagai rencana integrasi, tetapi belum ada kode `wa.me` di repo ini (cek: tidak ada hasil pencarian `whatsapp|wa.me`). Ditandai sebagai TODO backend.
+- **Data kontak ganda**: `data/profile.js` (Depok, `081234567890`) berbeda dengan tampilan `components/contact.js` (`+1 561...`, `info@Advizo.com`, Newtown CT). Perlu disepakati satu sumber kebenaran sebelum rilis.
+- **Metadata**: `app/layout.js` masih memakai judul default `"Create Next App"` — ganti dengan `"SiBarber — Barbershop UMKM"` + deskripsi sebelum demo.
+
+## Screenshot (desktop)
+
+| Tampilan | File |
+| :--- | :--- |
+| Wireframe Figma (1 frame landing desktop) | `docs/assets/wireframe-landing-desktop.png` |
+| Hasil implementasi web (landing desktop) | `docs/assets/hasil-landing-desktop.png` |
+
+### Wireframe — desain Figma
+
+![Wireframe landing desktop SiBarber](docs/assets/wireframe-landing-desktop.png)
+
+### Hasil implementasi — website
+
+![Hasil landing desktop SiBarber](docs/assets/hasil-landing-desktop.png)
+
+## Dokumentasi
+
+- Alur pengguna: [`docs/USER-FLOW.md`](docs/USER-FLOW.md)
+- Dokumentasi teknis: [`docs/TECHNICAL.md`](docs/TECHNICAL.md)
+- Wireframe & design system: [`docs/WIREFRAME.md`](docs/WIREFRAME.md)
+
+Screenshot tampilan ada di [`docs/assets/`](docs/assets/) (diekspos dari Figma + hasil implementasi).
