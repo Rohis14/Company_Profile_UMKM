@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 function UserIcon({ className }) {
   return (
     <svg
@@ -69,49 +67,10 @@ function FieldIcon({ children }) {
 }
 
 export function ContactForm() {
-  const [status, setStatus] = useState({ state: "idle", message: "" });
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    const data = new FormData(form);
-
-    const nama = `${data.get("firstName") ?? ""} ${data.get("lastName") ?? ""}`.trim();
-
-    setStatus({ state: "loading", message: "Mengirim..." });
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nama,
-          email: data.get("email"),
-          pesan: data.get("message"),
-        }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Pesan gagal dikirim");
-      }
-
-      setStatus({ state: "success", message: result.message });
-      form.reset();
-    } catch (error) {
-      setStatus({
-        state: "error",
-        message: error.message || "Pesan gagal dikirim",
-      });
-    }
-  }
-
   return (
     <form
       className="mt-6 space-y-4"
-      onSubmit={handleSubmit}
+      onSubmit={(event) => event.preventDefault()}
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
@@ -124,7 +83,6 @@ export function ContactForm() {
             </FieldIcon>
             <input
               id="first-name"
-              name="firstName"
               type="text"
               placeholder="Enter first name"
               className={iconInputClass}
@@ -141,7 +99,6 @@ export function ContactForm() {
             </FieldIcon>
             <input
               id="last-name"
-              name="lastName"
               type="text"
               placeholder="Enter last name"
               className={iconInputClass}
@@ -161,7 +118,6 @@ export function ContactForm() {
             </FieldIcon>
             <input
               id="email"
-              name="email"
               type="email"
               placeholder="Enter email"
               className={iconInputClass}
@@ -178,7 +134,6 @@ export function ContactForm() {
             </FieldIcon>
             <input
               id="phone"
-              name="phone"
               type="tel"
               placeholder="Enter phone"
               className={iconInputClass}
@@ -193,7 +148,6 @@ export function ContactForm() {
         </label>
         <textarea
           id="message"
-          name="message"
           rows={4}
           placeholder="Type here . . ."
           className={`${inputClass} min-h-[96px] resize-y px-4 py-3`}
@@ -201,18 +155,11 @@ export function ContactForm() {
       </div>
 
       <button
-        type="submit"
-        disabled={status.state === "loading"}
+        type="button"
         className="rounded-lg bg-zinc-700 px-5 py-2.5 text-[13px] font-medium text-white transition-colors duration-150 hover:bg-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 motion-reduce:transition-none"
       >
         Send Message
       </button>
-
-      {status.message && (
-        <p role="status" className="text-[12px] text-zinc-400">
-          {status.message}
-        </p>
-      )}
     </form>
   );
 }

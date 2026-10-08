@@ -1,13 +1,48 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-// Harga dari API berupa angka dalam ribuan (mis. 35000),
-// format tampilan tetap dollar dengan 2 desimal: $35.00
-function formatPrice(harga) {
-  const value = Number(harga) / 1000;
-  return `$${(Number.isFinite(value) ? value : 0).toFixed(2)}`;
-}
+const PRODUCTS = [
+  {
+    title: "Clay Pomade 50ml",
+    desc: "The timeless haircut tailored to perfection. High matte hold and natural, all-day control.",
+    price: "$18.50",
+    tag: "Matte Finish",
+    rating: "4.8",
+  },
+  {
+    title: "Soothe & Guard Shave Balm",
+    desc: "Formulated for sensitive skin, zero alcohol cooling relief with witch hazel and aloe.",
+    price: "$16.00",
+    tag: "Post-Shave",
+    rating: "4.8",
+  },
+  {
+    title: "Sea Salt Texture Tonic",
+    desc: "Natural ocean grit, weightless lift.",
+    price: "$15.50",
+    tag: "Volume Spray",
+    rating: "4.7",
+  },
+  {
+    title: "Artisanal Beard Oil",
+    desc: "Cold-pressed jojoba and argan oils engineered for soft follicles and healthy shine.",
+    price: "$22.00",
+    tag: "Cold Pressed",
+    rating: "4.8",
+  },
+  {
+    title: "Reserve Styling Duo Kit",
+    desc: "Complete grooming ritual with handmade horn comb & flagship formula.",
+    price: "$34.00",
+    tag: "Limited Batch",
+    goldTag: true,
+    rating: "5.0",
+  },
+  {
+    title: "Sandalwood Beard Tonic",
+    desc: "Infused with organic sweet almond and royal sandalwood distillates.",
+    price: "$24.50",
+    tag: "Aromatherapy",
+    rating: "4.8",
+  },
+];
 
 function ScissorsIcon({ className = "h-16 w-16" }) {
   return (
@@ -109,38 +144,25 @@ function ProductCard({ product }) {
   return (
     <article className="overflow-hidden rounded-xl bg-zinc-950">
       <div className="relative aspect-[4/3] bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-950">
-        {product.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={product.image}
-            alt={product.title}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-600">
-            <ScissorsIcon className="h-8 w-8" />
-            <span className="text-[8px] font-semibold uppercase tracking-[0.3em]">
-              Product photo
-            </span>
-          </div>
-        )}
-        {product.rating != null && (
-          <span className="absolute right-2 top-2 flex items-center gap-1 rounded-md bg-black/70 px-2 py-1 text-[10px] font-semibold text-white">
-            <span className="text-gold-soft">★</span>
-            {product.rating}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-600">
+          <ScissorsIcon className="h-8 w-8" />
+          <span className="text-[8px] font-semibold uppercase tracking-[0.3em]">
+            Product photo
           </span>
-        )}
-        {product.tag && (
-          <span
-            className={`absolute bottom-3 left-3 rounded-md px-2 py-1 text-[9px] font-bold uppercase tracking-[0.12em] ${
-              product.goldTag
-                ? "bg-gold-soft text-zinc-950"
-                : "bg-black/70 text-white"
-            }`}
-          >
-            {product.tag}
-          </span>
-        )}
+        </div>
+        <span className="absolute right-2 top-2 flex items-center gap-1 rounded-md bg-black/70 px-2 py-1 text-[10px] font-semibold text-white">
+          <span className="text-gold-soft">★</span>
+          {product.rating}
+        </span>
+        <span
+          className={`absolute bottom-3 left-3 rounded-md px-2 py-1 text-[9px] font-bold uppercase tracking-[0.12em] ${
+            product.goldTag
+              ? "bg-gold-soft text-zinc-950"
+              : "bg-black/70 text-white"
+          }`}
+        >
+          {product.tag}
+        </span>
       </div>
       <div className="p-4">
         <h3 className="text-[15px] font-bold text-white">{product.title}</h3>
@@ -156,53 +178,6 @@ function ProductCard({ product }) {
 }
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    async function fetchProducts() {
-      try {
-        const response = await fetch("/api/products", {
-          signal: controller.signal,
-        });
-
-        if (!response.ok) {
-          throw new Error(`Gagal memuat produk (${response.status})`);
-        }
-
-        const result = await response.json();
-        const list = Array.isArray(result?.data) ? result.data : [];
-
-        setProducts(
-          list.map((item) => ({
-            id: item.id,
-            title: item.nama,
-            desc: item.deskripsi,
-            price: formatPrice(item.harga),
-            tag: item.tag,
-            rating: item.rating,
-            image: item.gambar,
-            goldTag: item.goldTag,
-          }))
-        );
-        setError(null);
-      } catch (err) {
-        if (err?.name === "AbortError") return;
-        setProducts([]);
-        setError(err?.message || "Gagal memuat produk");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchProducts();
-
-    return () => controller.abort();
-  }, []);
-
   return (
     <section id="products" className="relative">
       <div className="mx-auto max-w-6xl px-6 pb-10 pt-16 text-center sm:pt-20">
@@ -219,25 +194,9 @@ export default function Products() {
       <div className="bg-gold-soft px-4 pb-6 pt-4 sm:px-6 sm:pb-8 sm:pt-6">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {loading &&
-              Array.from({ length: 4 }).map((_, index) => (
-                <div
-                  key={`skeleton-${index}`}
-                  className="h-[280px] animate-pulse rounded-xl bg-zinc-950"
-                />
-              ))}
-
-            {!loading && error && (
-              <p className="col-span-full rounded-xl bg-zinc-950 px-4 py-6 text-center text-[13px] text-zinc-400">
-                {error}
-              </p>
-            )}
-
-            {!loading &&
-              !error &&
-              products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+            {PRODUCTS.map((product) => (
+              <ProductCard key={product.title} product={product} />
+            ))}
 
             <div className="relative flex flex-col justify-center overflow-hidden rounded-xl bg-gradient-to-br from-zinc-800 via-zinc-900 to-black p-6 sm:col-span-2">
               <div className="flex flex-col items-start gap-3">

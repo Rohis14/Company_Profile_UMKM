@@ -3,7 +3,7 @@ import { ContactForm } from "./contact-form";
 const CONTACT_ROWS = [
   {
     label: "Phone",
-    value: "081234567890",
+    value: "+1 561 301 4406",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -20,7 +20,7 @@ const CONTACT_ROWS = [
   },
   {
     label: "Email",
-    value: "sibarber@gmail.com",
+    value: "info@Advizo.com",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -38,7 +38,7 @@ const CONTACT_ROWS = [
   },
   {
     label: "Address",
-    value: "Jl. Raya Depok No. 10, Depok",
+    value: "Newtown, CT 06482",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -56,7 +56,7 @@ const CONTACT_ROWS = [
   },
   {
     label: "Hours",
-    value: "09:00 - 21:00",
+    value: "Monday \u2013 Friday, 9:00 AM \u2013 6:00 PM (EST)",
     icon: (
       <svg
         viewBox="0 0 24 24"
